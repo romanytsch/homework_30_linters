@@ -1,0 +1,176 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.2  22772 13792 ?        Ss   21:21   0:02 /sbin/init splash
+root           2  0.0  0.0      0     0 ?        S    21:21   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        S    21:21   0:00 [pool_workqueue_release]
+root           4  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-rcu_gp]
+root           5  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-sync_wq]
+root           6  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-kvfree_rcu_reclaim]
+root           7  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-slub_flushwq]
+root           8  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-netns]
+root          12  0.0  0.0      0     0 ?        I    21:21   0:00 [kworker/u8:0-ipv6_addrconf]
+root          13  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-mm_percpu_wq]
+root          14  0.0  0.0      0     0 ?        I    21:21   0:00 [rcu_tasks_kthread]
+root          15  0.0  0.0      0     0 ?        I    21:21   0:00 [rcu_tasks_rude_kthread]
+root          16  0.0  0.0      0     0 ?        I    21:21   0:00 [rcu_tasks_trace_kthread]
+root          17  0.0  0.0      0     0 ?        S    21:21   0:00 [ksoftirqd/0]
+root          18  0.1  0.0      0     0 ?        I    21:21   0:04 [rcu_preempt]
+root          19  0.0  0.0      0     0 ?        S    21:21   0:00 [rcu_exp_par_gp_kthread_worker/0]
+root          20  0.0  0.0      0     0 ?        S    21:21   0:00 [rcu_exp_gp_kthread_worker]
+root          21  0.0  0.0      0     0 ?        S    21:21   0:00 [migration/0]
+root          22  0.0  0.0      0     0 ?        S    21:21   0:00 [idle_inject/0]
+root          23  0.0  0.0      0     0 ?        S    21:21   0:00 [cpuhp/0]
+root          24  0.0  0.0      0     0 ?        S    21:21   0:00 [cpuhp/1]
+root          25  0.0  0.0      0     0 ?        S    21:21   0:00 [idle_inject/1]
+root          26  0.0  0.0      0     0 ?        S    21:21   0:00 [migration/1]
+root          27  0.0  0.0      0     0 ?        R    21:21   0:00 [ksoftirqd/1]
+root          28  0.0  0.0      0     0 ?        I    21:21   0:02 [kworker/1:0-events]
+root          29  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/1:0H-events_highpri]
+root          32  0.0  0.0      0     0 ?        S    21:21   0:00 [kdevtmpfs]
+root          33  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-inet_frag_wq]
+root          34  0.0  0.0      0     0 ?        S    21:21   0:00 [kauditd]
+root          35  0.0  0.0      0     0 ?        S    21:21   0:00 [khungtaskd]
+root          36  0.0  0.0      0     0 ?        S    21:21   0:00 [oom_reaper]
+root          38  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-writeback]
+root          39  0.0  0.0      0     0 ?        S    21:21   0:00 [kcompactd0]
+root          40  0.0  0.0      0     0 ?        SN   21:21   0:00 [ksmd]
+root          41  0.0  0.0      0     0 ?        SN   21:21   0:00 [khugepaged]
+root          43  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-kintegrityd]
+root          44  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-kblockd]
+root          45  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-blkcg_punt_bio]
+root          46  0.0  0.0      0     0 ?        S    21:21   0:00 [irq/9-acpi]
+root          47  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-tpm_dev_wq]
+root          48  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-ata_sff]
+root          49  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-md]
+root          50  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-md_bitmap]
+root          51  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-edac-poller]
+root          52  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-devfreq_wq]
+root          53  0.0  0.0      0     0 ?        S    21:21   0:00 [watchdogd]
+root          55  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/0:1H-kblockd]
+root          56  0.0  0.0      0     0 ?        S    21:21   0:00 [kswapd0]
+root          57  0.0  0.0      0     0 ?        S    21:21   0:00 [ecryptfs-kthread]
+root          58  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-kthrotld]
+root          59  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-acpi_thermal_pm]
+root          61  0.0  0.0      0     0 ?        S    21:21   0:00 [scsi_eh_0]
+root          62  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-scsi_tmf_0]
+root          63  0.0  0.0      0     0 ?        S    21:21   0:00 [scsi_eh_1]
+root          64  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-scsi_tmf_1]
+root          66  0.0  0.0      0     0 ?        I    21:21   0:00 [kworker/u10:3-kvfree_rcu_reclaim]
+root          68  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-mld]
+root          69  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-ipv6_addrconf]
+root          70  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/1:1H-kblockd]
+root          71  0.0  0.0      0     0 ?        I    21:21   0:00 [kworker/u8:1-ipv6_addrconf]
+root          79  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-kstrp]
+root          81  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/u11:0]
+root          82  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/u12:0]
+root          83  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/u13:0]
+root          88  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-cryptd]
+root          97  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-charger_manager]
+root         147  0.0  0.0      0     0 ?        S    21:21   0:00 [scsi_eh_2]
+root         148  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-scsi_tmf_2]
+root         192  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/0:2H-kblockd]
+root         210  0.0  0.0      0     0 ?        S    21:21   0:00 [jbd2/sda1-8]
+root         211  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-ext4-rsv-conversion]
+root         260  0.0  0.2  50580 16456 ?        S<s  21:21   0:00 /usr/lib/systemd/systemd-journald
+root         286  0.0  0.0      0     0 ?        I    21:21   0:00 [kworker/u9:3-events_power_efficient]
+root         287  0.0  0.0      0     0 ?        I    21:21   0:00 [kworker/0:3-events]
+root         339  0.0  0.1  29836  7748 ?        Ss   21:21   0:00 /usr/lib/systemd/systemd-udevd
+root         405  0.0  0.0      0     0 ?        S    21:21   0:00 [psimon]
+systemd+     411  0.0  0.2  21580 12832 ?        Ss   21:21   0:00 /usr/lib/systemd/systemd-resolved
+systemd+     420  0.0  0.1  91048  7804 ?        Ssl  21:21   0:00 /usr/lib/systemd/systemd-timesyncd
+root         590  0.0  0.0      0     0 ?        S    21:21   0:00 [irq/18-vmwgfx]
+root         592  0.0  0.0      0     0 ?        I<   21:21   0:00 [kworker/R-ttm]
+root         745  0.0  0.1 313696  8032 ?        Ssl  21:21   0:00 /usr/libexec/accounts-daemon
+avahi        748  0.0  0.0   8612  4452 ?        Ss   21:21   0:00 avahi-daemon: running [roma-virtualbox.local]
+root         750  0.0  0.0   9432  2692 ?        Ss   21:21   0:00 /usr/sbin/cron -f -P
+message+     751  0.0  0.1  10904  6336 ?        Ss   21:21   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+polkitd      760  0.0  0.1 384284 10392 ?        Ssl  21:21   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root         777  0.0  0.6 1849380 38900 ?       Ssl  21:21   0:02 /usr/lib/snapd/snapd
+root         779  0.0  0.1 309916  6868 ?        Ssl  21:21   0:00 /usr/libexec/switcheroo-control
+root         787  0.0  0.1  18136  8664 ?        Ss   21:21   0:00 /usr/lib/systemd/systemd-logind
+root         790  0.0  0.2 469336 13660 ?        Ssl  21:21   0:00 /usr/libexec/udisks2/udisksd
+avahi        817  0.0  0.0   8424  1472 ?        S    21:21   0:00 avahi-daemon: chroot helper
+root         818  0.0  0.3 337252 19324 ?        Ssl  21:21   0:00 /usr/sbin/NetworkManager --no-daemon
+root         819  0.0  0.1  17380  6280 ?        Ss   21:21   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+syslog       821  0.0  0.0 222508  5896 ?        Ssl  21:21   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         869  0.0  0.2 318364 12640 ?        Ssl  21:21   0:00 /usr/sbin/ModemManager
+root         988  0.0  0.1  37948 11560 ?        Ss   21:21   0:00 /usr/sbin/cupsd -l
+root         997  0.0  0.4 118044 24988 ?        Ssl  21:21   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+lp          1006  0.0  0.1  16832  6828 ?        S    21:21   0:00 /usr/lib/cups/notifier/dbus dbus://
+cups-br+    1015  0.0  0.3 268348 19784 ?        Ssl  21:21   0:00 /usr/sbin/cups-browsed
+root        1020  0.0  0.2 142636 17232 ?        Ssl  21:21   0:00 /usr/bin/sddm
+kernoops    1022  0.0  0.0  12744  2412 ?        Ss   21:21   0:00 /usr/sbin/kerneloops --test
+kernoops    1025  0.0  0.0  12744  2476 ?        Ss   21:21   0:00 /usr/sbin/kerneloops
+root        1036 20.2  1.6 316000 97148 tty2     Ssl+ 21:21  12:42 /usr/lib/xorg/Xorg -nolisten tcp -background none -seat seat0 vt2 -auth /run/sddm/xauth_dsKzUN -noreset -displayfd 16
+root        1099  0.0  0.2  65020 15988 ?        S    21:21   0:00 /usr/lib/x86_64-linux-gnu/sddm/sddm-helper --socket /tmp/sddm-auth-daae6caa-5ee9-49ad-a092-ef7b4315c7b2 --id 1 --start /usr/bin/startlxqt --user roma --autologin
+root        1101  0.0  0.0      0     0 ?        S    21:21   0:00 [psimon]
+roma        1103  0.0  0.1  20540 11372 ?        Ss   21:21   0:00 /usr/lib/systemd/systemd --user
+roma        1104  0.0  0.0  21188  3712 ?        S    21:21   0:00 (sd-pam)
+roma        1115  0.0  0.2 113124 12164 ?        S<sl 21:21   0:00 /usr/bin/pipewire
+roma        1116  0.0  0.0  97744  5932 ?        Ssl  21:21   0:00 /usr/bin/pipewire -c filter-chain.conf
+roma        1117  0.0  0.7 341244 42948 ?        Sl   21:21   0:00 lxqt-session
+roma        1118  0.0  0.3 407276 19136 ?        S<sl 21:21   0:00 /usr/bin/wireplumber
+roma        1119  0.0  0.1 109892 10928 ?        S<sl 21:21   0:00 /usr/bin/pipewire-pulse
+roma        1131  0.0  0.0  10248  5884 ?        Ss   21:21   0:00 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+rtkit       1136  0.0  0.0  22940  3432 ?        SNsl 21:21   0:00 /usr/libexec/rtkit-daemon
+roma        1198  0.0  0.0   8300  1468 ?        Ss   21:21   0:00 /usr/bin/ssh-agent /usr/bin/startlxqt
+roma        1222  0.0  0.3 149140 23120 ?        Sl   21:21   0:00 /usr/bin/openbox
+roma        1226  0.0  0.1 382824  8228 ?        Sl   21:21   0:00 /usr/libexec/at-spi-bus-launcher --launch-immediately
+roma        1228  0.0  1.7 660748 102644 ?       Sl   21:21   0:00 /usr/bin/python3 /usr/bin/blueman-applet
+roma        1235  0.0  0.0   9424  4816 ?        S    21:21   0:00 /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 13 --address=unix:path=/run/user/1000/at-spi/bus_0
+roma        1236  0.0  0.1 384220  6660 ?        Sl   21:21   0:00 /usr/libexec/geoclue-2.0/demos/agent
+roma        1240  0.0  0.7 272240 44948 ?        Sl   21:21   0:00 /usr/bin/lubuntu-update
+roma        1244  0.0  1.9 973268 113824 ?       Sl   21:21   0:00 /usr/bin/pcmanfm-qt --desktop --profile=lxqt
+roma        1245  0.0  0.7 340648 42012 ?        Sl   21:21   0:00 /usr/bin/lxqt-globalkeysd
+roma        1246  0.0  1.7 458552 101592 ?       Sl   21:21   0:00 /usr/bin/lxqt-notificationd
+roma        1247  0.0  2.0 842556 121864 ?       Sl   21:21   0:02 /usr/bin/lxqt-panel
+roma        1248  0.0  0.7 488684 43852 ?        Sl   21:21   0:00 /usr/bin/lxqt-policykit-agent
+roma        1249  0.0  0.9 437552 56872 ?        Sl   21:21   0:00 /usr/bin/lxqt-runner
+roma        1253  0.0  0.0   4644  3572 ?        S    21:21   0:00 /usr/bin/xscreensaver -no-splash
+roma        1255  0.7  0.1  18792  6796 ?        S    21:21   0:29 /usr/bin/picom
+roma        1259  0.0  0.6  64648 37152 ?        S    21:21   0:00 /usr/bin/python3 /usr/share/system-config-printer/applet.py
+roma        1262  0.0  0.0   7848  4096 ?        S    21:21   0:00 xscreensaver-systemd
+roma        1282  0.0  0.1 314620  8448 ?        Ssl  21:21   0:00 /usr/libexec/gvfsd
+roma        1290  0.0  0.1 460112  7272 ?        Sl   21:21   0:00 /usr/libexec/gvfsd-fuse /run/user/1000/gvfs -f
+roma        1297  0.0  0.1 536168  9300 ?        Sl   21:21   0:00 /usr/libexec/gvfsd-trash --spawner :1.19 /org/gtk/gvfs/exec_spaw/0
+roma        1319  0.0  0.1 236016  8224 ?        Sl   21:21   0:00 /usr/libexec/at-spi2-registryd --use-gnome-session
+roma        1329  0.0  0.1 389536 10484 ?        Ssl  21:21   0:00 /usr/libexec/gvfs-udisks2-volume-monitor
+roma        1335  0.0  0.1 310956  7164 ?        Ssl  21:21   0:00 /usr/libexec/gvfs-gphoto2-volume-monitor
+roma        1340  0.0  0.1 309996  6552 ?        Ssl  21:21   0:00 /usr/libexec/gvfs-goa-volume-monitor
+roma        1347  0.0  0.1 389600  8108 ?        Ssl  21:21   0:00 /usr/libexec/gvfs-afc-volume-monitor
+roma        1353  0.0  0.1 309988  6620 ?        Ssl  21:21   0:00 /usr/libexec/gvfs-mtp-volume-monitor
+root        1372  0.0  0.1 317320  9688 ?        Ssl  21:21   0:01 /usr/libexec/upowerd
+roma        1392  0.0  0.1  49072  8232 ?        Ss   21:21   0:00 /usr/libexec/bluetooth/obexd
+roma        1393  0.0  0.9 514184 55700 ?        Sl   21:21   0:00 /usr/bin/lxqt-powermanagement
+roma        1395  0.0  0.7 276688 43568 ?        Sl   21:21   0:00 /usr/bin/qlipper
+roma        1397  0.0  0.7 278288 45292 ?        Sl   21:21   0:00 /usr/bin/nm-tray
+roma        1440 11.8 35.6 5677188 2124364 ?     Sl   21:22   7:18 /snap/pycharm-community/510/bin/pycharm
+roma        1495  0.0  0.3 564032 18076 ?        Ssl  21:22   0:00 /usr/libexec/xdg-desktop-portal
+roma        1500  0.0  0.1 536964  7728 ?        Ssl  21:22   0:00 /usr/libexec/xdg-document-portal
+roma        1506  0.0  0.1 309532  6380 ?        Ssl  21:22   0:00 /usr/libexec/xdg-permission-store
+root        1513  0.0  0.0   2704  1868 ?        Ss   21:22   0:00 fusermount3 -o rw,nosuid,nodev,fsname=portal,auto_unmount,subtype=portal -- /run/user/1000/doc
+roma        1517  0.0  0.3 411692 20796 ?        Ssl  21:22   0:00 /usr/libexec/xdg-desktop-portal-gtk
+roma        1527  0.0  0.7 276988 46548 ?        Ssl  21:22   0:00 /usr/lib/x86_64-linux-gnu/libexec/xdg-desktop-portal-kde
+roma        1531  0.0  0.0   2800  1696 ?        S    21:22   0:00 /bin/sh -c env QT_QPA_PLATFORMTHEME=lxqt /usr/libexec/xdg-desktop-portal-lxqt
+roma        1532  0.0  0.6 263580 40024 ?        Sl   21:22   0:00 /usr/libexec/xdg-desktop-portal-lxqt
+roma        1580  0.0  0.0    764     0 ?        S    21:22   0:00 /snap/pycharm-community/510/bin/fsnotifier
+root        1797  0.0  0.0      0     0 ?        I    21:30   0:00 [kworker/1:2-cgroup_destroy]
+root        1822  0.0  0.0      0     0 ?        I    21:35   0:00 [kworker/u10:4-kvfree_rcu_reclaim]
+root        1839  0.1  0.7 594116 42624 ?        Ssl  21:36   0:03 /usr/libexec/fwupd/fwupd
+root        1915  0.0  0.0      0     0 ?        I    21:50   0:00 [kworker/u9:1-events_power_efficient]
+root        1941  0.0  0.0      0     0 ?        I    21:56   0:00 [kworker/u10:1-events_power_efficient]
+root        1944  0.0  0.0      0     0 ?        I    22:00   0:00 [kworker/0:1-cgroup_destroy]
+root        1959  0.0  0.0      0     0 ?        I    22:03   0:00 [kworker/u9:0-events_unbound]
+root        1965  0.0  0.0      0     0 ?        I    22:09   0:00 [kworker/u10:0-flush-8:0]
+roma        2003  0.0  0.1  12096  6112 pts/0    Ss   22:18   0:00 /bin/bash --rcfile /snap/pycharm-community/510/plugins/terminal/shell-integrations/bash/bash-integration.bash -i
+root        2049  0.0  0.0      0     0 ?        I    22:20   0:00 [kworker/1:1]
+root        2050  0.0  0.0      0     0 ?        I    22:20   0:00 [kworker/1:3]
+roma        2063  0.6  2.2 1507060 133728 ?      Sl   22:20   0:01 /snap/pycharm-community/510/jbr/lib/cef_server --port=6188 --logfile=/home/roma/.cache/JetBrains/PyCharmCE2025.2/log/jcef_1440.log --loglevel=100 --params=/tmp/cef_server_params.txt
+roma        2066  0.0  0.9 277088 57584 ?        S    22:20   0:00 /snap/pycharm-community/510/jbr/lib/cef_server --type=zygote --no-zygote-sandbox --no-sandbox --force-device-scale-factor=1.0 --log-severity=disable --lang=en-US --user-data-dir=/home/roma/.cache/JetBrains/PyCharmCE2025.2/jcef_cache --log-file=/home/roma/.cache/JetBrains/PyCharmCE2025.2/log/jcef_1440.log
+roma        2067  0.0  0.9 277088 57696 ?        S    22:20   0:00 /snap/pycharm-community/510/jbr/lib/cef_server --type=zygote --no-sandbox --force-device-scale-factor=1.0 --log-severity=disable --lang=en-US --user-data-dir=/home/roma/.cache/JetBrains/PyCharmCE2025.2/jcef_cache --log-file=/home/roma/.cache/JetBrains/PyCharmCE2025.2/log/jcef_1440.log
+roma        2084  0.2  1.8 1147520 111024 ?      Sl   22:20   0:00 /snap/pycharm-community/510/jbr/lib/cef_server --type=gpu-process --no-sandbox --log-severity=disable --lang=en-US --user-data-dir=/home/roma/.cache/JetBrains/PyCharmCE2025.2/jcef_cache --gpu-preferences=WAAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAABgAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAGAAAAAAAAAAYAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --log-file=/home/roma/.cache/JetBrains/PyCharmCE2025.2/log/jcef_1440.log --shared-files --field-trial-handle=0,i,6119716623673057273,557330554428848938,262144 --disable-features=SpareRendererForSitePerProcess --variations-seed-version
+roma        2107  0.0  0.6 646560 36964 ?        Sl   22:20   0:00 /snap/pycharm-community/510/jbr/lib/cef_server --type=utility --utility-sub-type=storage.mojom.StorageService --lang=ru --service-sandbox-type=utility --no-sandbox --log-severity=disable --lang=en-US --user-data-dir=/home/roma/.cache/JetBrains/PyCharmCE2025.2/jcef_cache --log-file=/home/roma/.cache/JetBrains/PyCharmCE2025.2/log/jcef_1440.log --shared-files=v8_context_snapshot_data:100 --field-trial-handle=0,i,6119716623673057273,557330554428848938,262144 --disable-features=SpareRendererForSitePerProcess --variations-seed-version
+roma        2108  0.0  1.2 720208 77360 ?        Sl   22:20   0:00 /snap/pycharm-community/510/jbr/lib/cef_server --type=utility --utility-sub-type=network.mojom.NetworkService --lang=ru --service-sandbox-type=none --no-sandbox --log-severity=disable --lang=en-US --user-data-dir=/home/roma/.cache/JetBrains/PyCharmCE2025.2/jcef_cache --log-file=/home/roma/.cache/JetBrains/PyCharmCE2025.2/log/jcef_1440.log --shared-files=v8_context_snapshot_data:100 --field-trial-handle=0,i,6119716623673057273,557330554428848938,262144 --disable-features=SpareRendererForSitePerProcess --variations-seed-version
+roma        2131  0.7  1.8 49632708 112436 ?     Sl   22:20   0:01 /snap/pycharm-community/510/jbr/lib/cef_server --type=renderer --log-severity=disable --user-data-dir=/home/roma/.cache/JetBrains/PyCharmCE2025.2/jcef_cache --no-sandbox --autoplay-policy=no-user-gesture-required --force-device-scale-factor=1.0 --log-file=/home/roma/.cache/JetBrains/PyCharmCE2025.2/log/jcef_1440.log --lang=ru --num-raster-threads=1 --renderer-client-id=5 --time-ticks-at-unix-epoch=-1756923678077060 --launch-time-ticks=3537969743 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=0,i,6119716623673057273,557330554428848938,262144 --disable-features=SpareRendererForSitePerProcess --variations-seed-version
+root        2251  0.0  0.0      0     0 ?        I    22:23   0:00 [kworker/u10:2-writeback]
+root        2289  0.0  0.0      0     0 ?        I    22:23   0:00 [kworker/0:0]
+roma        2317  100  0.0  13696  4480 pts/0    R+   22:24   0:00 ps aux

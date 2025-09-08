@@ -25,15 +25,35 @@ hello wo
 /home/user/module_2/docs/simple.txt 12
 hello world!
 """
-
-from flask import Flask
+import os
+from flask import Flask, abort, request
 
 app = Flask(__name__)
 
 
-@app.route("/head_file/<int:size>/<path:relative_path>")
-def head_file(size: int, relative_path: str):
-    ...
+@app.route("/head_file/<int:size>")
+def head_file(size: int):
+    """
+    Формат запроса: http://127.0.0.1:5000/head_file/15?path=/home/roma/PycharmProjects/python_advanced/module_02_linux/homework/hw6/README.md
+    """
+    relative_path = request.args.get("path")
+    if not relative_path:
+        abort(400, description="Missing path parameter")
+    file_path = os.path.abspath(relative_path)
+
+    if not os.path.isfile(file_path):
+        abort(404, description="File not found")
+
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read(size)  # читаем только SIZE символов
+    except Exception as e:
+        abort(500, description=f"Error reading file: {str(e)}")
+
+    result_size = len(content)
+    abs_path_formatted = f"<b>{file_path}</b>"
+
+    return f"{abs_path_formatted} {result_size}<br>{content}"
 
 
 if __name__ == "__main__":

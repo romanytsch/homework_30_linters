@@ -38,7 +38,39 @@ import sys
 
 
 def decrypt(encryption: str) -> str:
-    ...
+    encryption = encryption.strip()
+    result = []
+    i = 0
+    length = len(encryption)
+
+    while i < length:
+        char = encryption[i]
+        if char == '.':
+            count_dots = 1
+            j = i + 1
+            while j < length and encryption[j] == '.':
+                count_dots += 1
+                j += 1
+
+            dot_idx = i
+            while count_dots >= 2:
+                if result:
+                    result.pop()
+                count_dots -= 2
+                dot_idx += 2
+            if count_dots == 1:
+                dot_idx += 1
+
+            i = dot_idx
+        else:
+            result.append(char)
+            i += 1
+
+    decrypted = ''.join(result)
+    if decrypted == '':
+        return '<пустая строка>'
+    return decrypted
+
 
 
 if __name__ == '__main__':
