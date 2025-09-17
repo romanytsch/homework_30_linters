@@ -1,4 +1,4 @@
-from materials.testing_age.social_age import get_social_status
+from module_03_ci_culture_beginning.materials.testing_age.social_age import get_social_status
 
 def check_if_can_get_child_status():
    age = 8
