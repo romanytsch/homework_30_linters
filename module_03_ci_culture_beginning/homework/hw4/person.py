@@ -1,3 +1,5 @@
+import datetime
+
 
 class Person:
     def __init__(self, name: str, year_of_birth: int, address: str = '') -> None:
@@ -7,16 +9,16 @@ class Person:
 
     def get_age(self) -> int:
         now: datetime.datetime = datetime.datetime.now()
-        return self.yob - now.year
+        return now.year - self.yob
 
     def get_name(self) -> str:
         return self.name
 
     def set_name(self, name: str) -> None:
-        self.name = self.name
+        self.name = name
 
     def set_address(self, address: str) -> None:
-        self.address == address
+        self.address = address
 
     def get_address(self) -> str:
         return self.address
@@ -25,4 +27,4 @@ class Person:
         '''
         returns True if address is not set, false in other case
         '''
-        return address is None
+        return not self.address
