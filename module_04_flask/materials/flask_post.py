@@ -5,6 +5,9 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+@app.route("/")
+def index():
+    return "App is running in debug mode"
 
 @app.route("/sum", methods=["POST"])
 def _sum():
