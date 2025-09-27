@@ -10,6 +10,7 @@ from flask_wtf import FlaskForm
 from wtforms import ValidationError
 
 
+
 def number_length(min: int, max: int, message: Optional[str] = None):
     def _number_length(form, field):
         length = len(str(field.data))

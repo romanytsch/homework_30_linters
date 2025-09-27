@@ -29,6 +29,7 @@ class RegistrationForm(FlaskForm):
     comment = StringField(validators=[Optional()])
 
 
+
 @app.route("/registration", methods=["POST"])
 def registration():
     form = RegistrationForm()
