@@ -5,6 +5,7 @@ import subprocess
 def run_program():
     start = time.time()
     procs = []
+    command_line = """sleep 15 && echo "My mission is done here!""""
     for pnum in range(1, 6):
         p = subprocess.Popen(
             ['python', 'test_program.py'],
