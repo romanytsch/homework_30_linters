@@ -1,5 +1,6 @@
 """
-Реализуйте контекстный менеджер, который будет игнорировать переданные типы исключений, возникающие внутри блока with.
+Реализуйте контекстный менеджер, который будет игнорировать переданные типы исключений,
+возникающие внутри блока with.
 Если выкидывается неожидаемый тип исключения, то он прокидывается выше.
 """
 
@@ -9,10 +10,10 @@ from types import TracebackType
 
 class BlockErrors:
     def __init__(self, errors: Collection) -> None:
-        ...
+        self.errors = errors
 
     def __enter__(self) -> None:
-        ...
+        pass
 
     def __exit__(
             self,
@@ -20,4 +21,9 @@ class BlockErrors:
             exc_val: BaseException | None,
             exc_tb: TracebackType | None
     ) -> Literal[True] | None:
-        ...
+        if exc_type is None:
+            return None
+        # Проверяем, является ли тип исключения дочерним для одного из указанных ошибок
+        if issubclass(exc_type, tuple(self.errors)):
+            return True # подавляем исключение
+        return None # исключение прокидывается дальше
