@@ -5,6 +5,7 @@
 """
 
 import csv
+import logging
 from typing import Optional
 
 from flask import Flask
@@ -12,6 +13,7 @@ from werkzeug.exceptions import InternalServerError
 
 app = Flask(__name__)
 
+logger = logging.getLogger("bank_api")
 
 @app.route("/bank_api/<branch>/<int:person_id>")
 def bank_api(branch: str, person_id: int):
@@ -32,13 +34,9 @@ def handle_exception(e: InternalServerError):
     original: Optional[Exception] = getattr(e, "original_exception", None)
 
     if isinstance(original, FileNotFoundError):
-        with open("invalid_error.log", "a") as fo:
-            fo.write(
-                    f"Tried to access {original.filename}. Exception info: {original.strerror}\n"
-            )
+        logger.error(f"Tried to access {original.filename}. Exception info: {original.strerror}\n")
     elif isinstance(original, OSError):
-        with open("invalid_error.log", "a") as fo:
-            fo.write(f"Unable to access a card. Exception info: {original.strerror}\n")
+        logger.error(f"Unable to access a card. Exception info: {original.strerror}\n")
 
     return "Internal server error", 500
 

@@ -13,6 +13,7 @@ timsort (стандартная сортировка python) и сортиров
 import heapq
 import json
 import logging
+import time
 from typing import List
 
 from flask import Flask, request
@@ -23,6 +24,7 @@ logger = logging.getLogger("sort")
 
 
 def bubble_sort(array: List[int]) -> List[int]:
+    start_time = time.perf_counter()
     n = len(array)
 
     for i in range(n):
@@ -30,21 +32,29 @@ def bubble_sort(array: List[int]) -> List[int]:
             if array[i] > array[j]:
                 array[i], array[j] = array[j], array[i]
 
+    elapsed = time.perf_counter() - start_time
+    logger.debug(f"bubble_sort took {elapsed:.6f} seconds for {n} elements")
     return array
 
 
 def tim_sort(array: List[int]) -> List[int]:
+    start_time = time.perf_counter()
     array.sort()
 
+    elapsed = time.perf_counter() - start_time
+    logger.debug(f"tim_sort took {elapsed:.6f} seconds for {len(array)} elements")
     return array
 
 
 def heap_sort(array: List[int]) -> List[int]:
+    start_time = time.perf_counter()
     data = []
 
     for val in array:
         heapq.heappush(data, val)
 
+    elapsed = time.perf_counter() - start_time
+    logger.debug(f"heap_sort took {elapsed:.6f} seconds for {len(array)} elements")
     return [heapq.heappop(data) for _ in range(len(data))]
 
 

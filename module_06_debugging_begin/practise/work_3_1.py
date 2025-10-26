@@ -1,6 +1,6 @@
 """
-В приложении для парольной аутентификации, которое мы рассматривали, недостаточно debug-сообщений. Добавим после каждой
-строки с кодом в функции input_and_check_password ещё по debug-сообщению, например:
+В приложении для парольной аутентификации, которое мы рассматривали, недостаточно debug-сообщений.
+Добавим после каждой строки с кодом в функции input_and_check_password ещё по debug-сообщению, например:
 f"Мы создали объект hasher {hasher!r}"
 после строки:
 "hasher = hashlib.md5()"
@@ -23,10 +23,13 @@ def input_and_check_password():
 
     try:
         hasher = hashlib.md5()
+        logger.debug(f"Мы создали объект hasher {hasher!r}")
 
         hasher.update(password.encode("latin-1"))
+        logger.debug(f"Мы включили латинскую кодировку")
 
         if hasher.hexdigest() == "098f6bcd4621d373cade4e832627b4f6":
+            logger.debug(f"Мы сравниваем правильность пароля")
             return True
     except ValueError as ex:
         logger.exception("Вы ввели некорректный символ ", exc_info=ex)
