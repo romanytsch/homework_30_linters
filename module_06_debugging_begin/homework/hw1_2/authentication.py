@@ -12,18 +12,24 @@
 так что нужно доработать программу из предыдущей задачи.
 
 Напишите функцию is_strong_password, которая принимает на вход пароль в виде строки,
-а возвращает булево значение, которое показывает, является ли пароль хорошим по новым стандартам безопасности.
+а возвращает булево значение, которое показывает, является ли пароль хорошим по новым стандартам
+безопасности.
 """
 
 import getpass
 import hashlib
 import logging
+import re
 
 logger = logging.getLogger("password_checker")
 
 
 def is_strong_password(password: str) -> bool:
-    return True
+    if re.search(r'[A-Za-z]', password):
+        logger.debug("В пароле имеются латинские символы")
+        return True
+    logger.debug("Пароль соответствует требованиям безопасности")
+    return False
 
 
 def input_and_check_password() -> bool:
@@ -40,7 +46,7 @@ def input_and_check_password() -> bool:
     try:
         hasher = hashlib.md5()
 
-        hasher.update(password.encode("latin-1"))
+        hasher.update(password.encode("utf-8"))
 
         if hasher.hexdigest() == "098f6bcd4621d373cade4e832627b4f6":
             return True
@@ -51,7 +57,10 @@ def input_and_check_password() -> bool:
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO,
+                        filename="stderr.txt",
+                        format='%(asctime)s %(levelname)s %(message)s',
+                        datefmt='%H:%M:%S')
     logger.info("Вы пытаетесь аутентифицироваться в Skillbox")
     count_number: int = 3
     logger.info(f"У вас есть {count_number} попыток")
