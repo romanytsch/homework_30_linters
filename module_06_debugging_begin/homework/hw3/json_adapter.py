@@ -10,7 +10,8 @@
 
 Чтобы этого избежать, потребуется LoggerAdapter. Это класс из модуля logging,
 который позволяет модифицировать логи перед тем, как они выводятся.
-У него есть единственный метод — process, который изменяет сообщение или именованные аргументы, переданные на вход.
+У него есть единственный метод — process, который изменяет сообщение или именованные аргументы,
+переданные на вход.
 
 class JsonAdapter(logging.LoggerAdapter):
   def process(self, msg, kwargs):
@@ -24,17 +25,30 @@ logger.info('Сообщение')
 
 Вам нужно дописать метод process так, чтобы в логах была всегда JSON-валидная строка.
 """
-
+import datetime
+import json
 import logging
 
 
 class JsonAdapter(logging.LoggerAdapter):
     def process(self, msg, kwargs):
-        new_message = msg
-        return new_message, kwargs
+        safe_msg = msg.replace('"', '\\"')
+        record = {
+            "time": datetime.datetime.now().strftime("%H:%M:%S"),
+            "level": logging.getLevelName(self.logger.level),
+            "message": safe_msg
+        }
+
+        json_msg = json.dumps(record, ensure_ascii=False)
+        return json_msg, kwargs
 
 
 if __name__ == '__main__':
+    logging.basicConfig(
+        level=logging.DEBUG,
+        filename="skillbox_json_messages.log",
+        format='%(message)s'
+    )
     logger = JsonAdapter(logging.getLogger(__name__))
     logger.setLevel(logging.DEBUG)
     logger.info('Сообщение')
