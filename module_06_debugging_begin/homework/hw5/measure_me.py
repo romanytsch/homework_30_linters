@@ -24,7 +24,7 @@ def get_data_line(sz: int) -> List[int]:
 
 
 def measure_me(nums: List[int]) -> List[List[int]]:
-    logger.debug("Enter measure_me")
+    logger.debug("Enter_measure_me")
     results = []
     nums.sort()
 
@@ -56,7 +56,7 @@ def measure_me(nums: List[int]) -> List[List[int]]:
 
                     right -= 1
 
-    logger.debug("Leave measure_me")
+    logger.debug("Leave_measure_me")
 
     return results
 
@@ -64,14 +64,14 @@ def measure_me(nums: List[int]) -> List[List[int]]:
 if __name__ == "__main__":
     logging.basicConfig(
         level=logging.DEBUG,
-        format='%(asctime)s %(levelname)s %(message)s',
-        datefmt='%H:%M:%S.%f',
+        format='%(asctime)s.%(msecs)03d %(levelname)s %(message)s',
+        datefmt='%H:%M:%S',
         filename='app.log',
         filemode='w',
     )
-    for it in range(15):
-        data_line = get_data_line(10 ** 2)
+    for it in range(10):
+        data_line = get_data_line(100)
         measure_me(data_line)
 
     avg_time = calculate_average_duration()
-    print(f"Среднее время выполнения measure_me: {avg_time:.4f} секунд")
+    print(f"Среднее время выполнения measure_me: {avg_time:.3f} секунд")
