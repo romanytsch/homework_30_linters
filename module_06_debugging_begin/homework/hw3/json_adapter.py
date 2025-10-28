@@ -54,3 +54,4 @@ if __name__ == '__main__':
     logger.info('Сообщение')
     logger.error('Кавычка)"')
     logger.debug("Еще одно сообщение")
+11
