@@ -4,11 +4,13 @@
 
 Программа, которую вы видите, по умолчанию пишет логи в stdout. Внутри неё есть функция measure_me,
 в начале и в конце которой пишется "Enter measure_me" и "Leave measure_me".
-Сконфигурируйте логгер, запустите программу, соберите логи и посчитайте среднее время выполнения функции measure_me.
+Сконфигурируйте логгер, запустите программу, соберите логи и посчитайте среднее время
+выполнения функции measure_me.
 """
 import logging
 import random
 from typing import List
+from log_analyzer import calculate_average_duration
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +24,7 @@ def get_data_line(sz: int) -> List[int]:
 
 
 def measure_me(nums: List[int]) -> List[List[int]]:
-    logger.debug("Enter measure_me")
+    logger.debug("Enter_measure_me")
     results = []
     nums.sort()
 
@@ -54,13 +56,22 @@ def measure_me(nums: List[int]) -> List[List[int]]:
 
                     right -= 1
 
-    logger.debug("Leave measure_me")
+    logger.debug("Leave_measure_me")
 
     return results
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level="DEBUG")
-    for it in range(15):
-        data_line = get_data_line(10 ** 3)
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s.%(msecs)03d %(levelname)s %(message)s',
+        datefmt='%H:%M:%S',
+        filename='app.log',
+        filemode='w',
+    )
+    for it in range(10):
+        data_line = get_data_line(100)
         measure_me(data_line)
+
+    avg_time = calculate_average_duration()
+    print(f"Среднее время выполнения measure_me: {avg_time:.3f} секунд")

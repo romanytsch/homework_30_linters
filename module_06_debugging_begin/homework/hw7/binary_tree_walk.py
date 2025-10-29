@@ -18,6 +18,7 @@ def restore_tree(path_to_log_file: str) -> BinaryTreeNode:
 import itertools
 import logging
 import random
+import re
 from collections import deque
 from dataclasses import dataclass
 from typing import Optional
@@ -71,14 +72,60 @@ def get_tree(max_depth: int, level: int = 1) -> Optional[BinaryTreeNode]:
 
 
 def restore_tree(path_to_log_file: str) -> BinaryTreeNode:
-    pass
+    node_map = {}
+
+    # Регулярные выражения для парсинга лога
+    visit_re = re.compile(r"INFO:Visiting <BinaryTreeNode\[(\d+)\]>")
+    left_re = re.compile(
+        r"DEBUG:<BinaryTreeNode\[(\d+)\]> left is not empty. Adding <BinaryTreeNode\[(\d+)\]> to the queue")
+    right_re = re.compile(
+        r"DEBUG:<BinaryTreeNode\[(\d+)\]> right is not empty. Adding <BinaryTreeNode\[(\d+)\]> to the queue")
+
+    root_value = None
+
+    with open(path_to_log_file, "r") as f:
+        lines = f.readlines()
+
+    for line in lines:
+        visit_match = visit_re.match(line)
+        if visit_match:
+            node_val = int(visit_match.group(1))
+            if node_val not in node_map:
+                node_map[node_val] = BinaryTreeNode(node_val)
+            if root_value is None:
+                root_value = node_val
+            continue
+
+        left_match = left_re.match(line)
+        if left_match:
+            parent_val = int(left_match.group(1))
+            left_val = int(left_match.group(2))
+            if parent_val not in node_map:
+                node_map[parent_val] = BinaryTreeNode(parent_val)
+            if left_val not in node_map:
+                node_map[left_val] = BinaryTreeNode(left_val)
+            node_map[parent_val].left = node_map[left_val]
+            continue
+
+        right_match = right_re.match(line)
+        if right_match:
+            parent_val = int(right_match.group(1))
+            right_val = int(right_match.group(2))
+            if parent_val not in node_map:
+                node_map[parent_val] = BinaryTreeNode(parent_val)
+            if right_val not in node_map:
+                node_map[right_val] = BinaryTreeNode(right_val)
+            node_map[parent_val].right = node_map[right_val]
+            continue
+
+    return node_map[root_value]
 
 
 if __name__ == "__main__":
     logging.basicConfig(
         level=logging.DEBUG,
         format="%(levelname)s:%(message)s",
-        filename="walk_log_4.txt",
+        filename="restore_log.txt",
     )
 
     root = get_tree(7)

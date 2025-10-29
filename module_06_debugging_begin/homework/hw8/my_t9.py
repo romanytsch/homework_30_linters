@@ -18,10 +18,30 @@
 и возвращает список слов английского языка, которые можно получить из этой последовательности цифр.
 """
 from typing import List
+import re
 
+T9_DATA = {
+    '2': '[abc]',
+    '3': '[def]',
+    '4': '[ghi]',
+    '5': '[jkl]',
+    '6': '[mno]',
+    '7': '[pqrs]',
+    '8': '[tuv]',
+    '9': '[wxyz]'
+}
 
 def my_t9(input_numbers: str) -> List[str]:
-    ...
+    pattern = ''.join(T9_DATA.get(digit, '') for digit in input_numbers)
+    regex = re.compile('^' + pattern + '$', re.IGNORECASE)
+
+    result = []
+    with open("words.txt") as f:
+        for line in f:
+            word = line.strip()
+            if len(word) == len(input_numbers) and regex.match(word):
+                result.append(word)
+    return result
 
 
 if __name__ == '__main__':
