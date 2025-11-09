@@ -1,7 +1,6 @@
-
+import logging
 from typing import Union, Callable
 from operator import sub, mul, truediv, add
-
 
 OPERATORS = {
     '+': add,
@@ -12,6 +11,7 @@ OPERATORS = {
 
 Numeric = Union[int, float]
 
+logger = logging.getLogger("utils")
 
 def string_to_operator(value: str) -> Callable[[Numeric, Numeric], Numeric]:
     """
@@ -19,11 +19,11 @@ def string_to_operator(value: str) -> Callable[[Numeric, Numeric], Numeric]:
     :param value: basic arithmetic function
     """
     if not isinstance(value, str):
-        print("wrong operator type", value)
+        logger.debug("wrong operator type %s", value)
         raise ValueError("wrong operator type")
 
     if value not in OPERATORS:
-        print("wrong operator value", value)
+        logger.debug("wrong operator value %s", value)
         raise ValueError("wrong operator value")
 
     return OPERATORS[value]
