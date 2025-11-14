@@ -1,14 +1,18 @@
-import logging
+
 import sys
+import logging.config
 from utils import string_to_operator
+# from logger_helper import get_logger
+from logging_config import dict_config
+import logging_tree
+
+
+logging.config.dictConfig(dict_config)
 
 logger = logging.getLogger("calc")
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename="log_file.log",
-    format="%(asctime)s | %(name)s | %(levelname)s | %(message)s"
-)
+with open("logging_tree.txt", "w", encoding="utf-8") as f:
+    f.write(logging_tree.format.build_description())
 
 def calc(args):
     logger.info("Arguments: %s", args)

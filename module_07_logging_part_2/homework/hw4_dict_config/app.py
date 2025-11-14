@@ -1,14 +1,14 @@
-import logging
+
 import sys
+import logging.config
 from utils import string_to_operator
+# from logger_helper import get_logger
+from logging_config import dict_config
+
+
+logging.config.dictConfig(dict_config)
 
 logger = logging.getLogger("calc")
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename="log_file.log",
-    format="%(asctime)s | %(name)s | %(levelname)s | %(message)s"
-)
 
 def calc(args):
     logger.info("Arguments: %s", args)

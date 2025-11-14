@@ -1,6 +1,6 @@
 import logging
 import sys
-from utils import string_to_operator
+from utils import string_to_operator, configure_logging
 
 logger = logging.getLogger("calc")
 
@@ -36,5 +36,6 @@ def calc(args):
 
 
 if __name__ == '__main__':
+    configure_logging()
     # calc(sys.argv[1:])
     calc('2+3')

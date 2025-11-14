@@ -35,17 +35,18 @@ class LevelFileHandler(logging.Handler):
             f.close()
         super().close()
 
-def get_logger(name):
-    logger = logging.getLogger(name)
-    logger.setLevel(logging.DEBUG)
+# def get_logger(name):
+#     logger = logging.getLogger(name)
+#     logger.setLevel(logging.DEBUG)
+#
+#     formatter = logging.Formatter(
+#         '%(levelname)s | %(name)s | %(asctime)s | %(lineno)d | %(message)s',
+#         datefmt='%Y-%m-%d %H:%M:%S'
+#     )
+#
+#     level_file_handler = LevelFileHandler()
+#     level_file_handler.setFormatter(formatter)
+#     logger.addHandler(level_file_handler)
+#
+#     return logger
 
-    formatter = logging.Formatter(
-        '%(levelname)s | %(name)s | %(asctime)s | %(lineno)d | %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S'
-    )
-
-    level_file_handler = LevelFileHandler()
-    level_file_handler.setFormatter(formatter)
-    logger.addHandler(level_file_handler)
-
-    return logger
