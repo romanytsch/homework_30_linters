@@ -5,9 +5,9 @@ from flask import Flask, render_template, send_from_directory
 root_dir = os.path.dirname(os.path.abspath(__file__))
 
 template_folder = os.path.join(root_dir, "templates")
-js_directory = os.path.join(template_folder, "js")
-css_directory = os.path.join(template_folder, "css")
-images_directory = os.path.join(template_folder, "images")
+js_directory = os.path.join(template_folder, "/static/js")
+css_directory = os.path.join(template_folder, "/static/css")
+images_directory = os.path.join(template_folder, "/static/images")
 
 app = Flask(__name__, template_folder=template_folder)
 
