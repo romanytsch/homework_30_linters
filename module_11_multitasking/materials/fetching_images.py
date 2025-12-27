@@ -21,11 +21,15 @@ def get_image(url: str, result_path: str) -> None:
     with open(result_path, 'wb') as ouf:
         ouf.write(response.content)
 
+def task(number):
+    return sum(i ** i for i in range(number))
+
 
 def load_images_sequential() -> None:
     start: float = time.time()
     for i in range(10):
-        get_image(URL, OUT_PATH.format(i))
+        # get_image(URL, OUT_PATH.format(i))
+        task(3000)
     logger.info('Done in {:.4}'.format(time.time() - start))
 
 
@@ -33,7 +37,7 @@ def load_images_multithreading() -> None:
     start: float = time.time()
     threads: List[threading.Thread] = []
     for i in range(10):
-        thread = threading.Thread(target=get_image, args=(URL, OUT_PATH.format(i)))
+        thread = threading.Thread(target=task, args=(3000,))
         thread.start()
         threads.append(thread)
 
@@ -47,10 +51,7 @@ def load_images_multiprocessing() -> None:
     start: float = time.time()
     procs: List[multiprocessing.Process] = []
     for i in range(10):
-        proc = multiprocessing.Process(
-            target=get_image,
-            args=(URL, OUT_PATH.format(i)),
-        )
+        proc = multiprocessing.Process(target=task, args=(3000,))
         proc.start()
         procs.append(proc)
 
