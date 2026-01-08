@@ -1,15 +1,17 @@
-## Задача 3. Прерывание программы
-
-### Что нужно сделать
-
-Внесите изменения в следующую программу так, чтобы её можно было прервать с помощью `Ctrl+C`, корректно завершив потоки `t1` и `t2`:
-
-```python
-from threading import Semaphore, Thread
+from threading import Semaphore, Thread, Event
 import time
+import signal
+import sys
 
 sem: Semaphore = Semaphore()
+stop_event = Event()
 
+def signal_handler(sig, frame):
+    print('\nПолучен сигнал прерывания, завершение потоков...')
+    stop_event.set()
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
 
 def fun1():
     while True:
@@ -18,7 +20,6 @@ def fun1():
         sem.release()
         time.sleep(0.25)
 
-
 def fun2():
     while True:
         sem.acquire()
@@ -26,23 +27,12 @@ def fun2():
         sem.release()
         time.sleep(0.25)
 
+t1 = Thread(target=fun1, daemon=True)
+t2 = Thread(target=fun2, daemon=True)
 
-t1: Thread = Thread(target=fun1)
-t2: Thread = Thread(target=fun2)
-try:
-    t1.start()
-    t2.start()
-except KeyboardInterrupt:
-    print('\nReceived keyboard interrupt, quitting threads.')
-    exit(1)
-```
+t1.start()
+t2.start()
 
-### Советы и рекомендации
-
-Вероятно, в интернете вы найдёте много вариантов решения этой задачи. Выберите несколько и подумайте, какой из них лучше
-и почему.
-
-### Что оценивается
-
-* Функции `fun1()` и `fun2()` не претерпели изменений.
-* При нажатии `Ctrl+C` программа завершает работу потоков.
+# Бесконечное ожидание с проверкой события
+while not stop_event.is_set():
+    time.sleep(0.1)
