@@ -1,6 +1,10 @@
 import sqlite3
 
-sql_script_to_execute = "..."
+sql_script_to_execute = """
+    UPDATE table_russian_post
+    SET order_day = REPLACE(order_day, '-05-', '-06-')
+    WHERE order_day LIKE '%-05-%'
+"""
 
 if __name__ == "__main__":
     with sqlite3.connect("practise.db") as conn:
