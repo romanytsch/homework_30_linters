@@ -1,6 +1,5 @@
 import sqlite3
 
-
 def register(username: str, password: str) -> None:
     with sqlite3.connect('../homework.db') as conn:
         cursor = conn.cursor()
