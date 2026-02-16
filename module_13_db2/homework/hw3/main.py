@@ -26,6 +26,7 @@ def check_if_such_bird_already_seen(
     return cursor.fetchone()[0] == 1
 
 
+
 if __name__ == "__main__":
     print("Программа помощи ЮНатам v0.1")
     name: str = input("Пожалуйста введите имя птицы\n> ")
