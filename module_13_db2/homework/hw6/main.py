@@ -50,6 +50,7 @@ def update_work_schedule(cursor: sqlite3.Cursor) -> None:
             """, (worker_id, date_str))
 
 
+
 if __name__ == '__main__':
     with sqlite3.connect('../homework.db') as conn:
         cursor: sqlite3.Cursor = conn.cursor()
