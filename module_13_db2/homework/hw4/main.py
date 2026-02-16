@@ -28,6 +28,7 @@ def ivan_sovin_the_most_effective(
             )
 
 
+
 if __name__ == '__main__':
     name: str = input('Введите имя сотрудника: ')
     with sqlite3.connect('../homework.db') as conn:
