@@ -7,6 +7,7 @@ DELETE
     WHERE truck_number = ? AND timestamp = ?
 """
 
+
 def delete_wrong_fees(
         cursor: sqlite3.Cursor,
         wrong_fees_file: str
