@@ -3,7 +3,10 @@
 {% block content %}
 <div class="form-style-10">
     <h1>Add new book!<span>Fill the fields and and new books to the DB!</span></h1>
-    <form action="/books/form" method="post">
+
+    <form method="post" novalidate>
+        {{ form.hidden_tag() }}
+
         <div class="section"><span>1</span>Book title</div>
         <div class="inner-wrap">
             <label>Book title<input type="text" name="book_title"/></label>

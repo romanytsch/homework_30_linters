@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for
 from typing import List
 
 from models import init_db, get_all_books, DATA, add_book
+from forms import BookForm
 
 app: Flask = Flask(__name__)
+
+app.secret_key = 'you-secret-key'
 
 
 def _get_html_table_for_books(books: List[dict]) -> str:
@@ -40,13 +43,13 @@ def all_books() -> str:
 
 @app.route('/books/form', methods=['GET', 'POST'])
 def get_books_form():
-    if request.method == 'POST':
-        title = request.form['book_title']
-        author = request.form['author_name']
-        add_book(title, author)
+    form = BookForm()
+
+    if form.validate_on_submit():
+        add_book(form.book_title.data, form.author_name.data)
         return redirect(url_for('all_books'))
 
-    return render_template('add_book.html')
+    return render_template('add_book.html', form=form)
 
 
 if __name__ == '__main__':
