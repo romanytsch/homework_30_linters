@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from typing import List
 
-from models import init_db, get_all_books, DATA, add_book
+from models import init_db, get_all_books, DATA, add_book, get_books_by_author
 from forms import BookForm
 
 app: Flask = Flask(__name__)
@@ -50,6 +50,14 @@ def get_books_form():
         return redirect(url_for('all_books'))
 
     return render_template('add_book.html', form=form)
+
+
+@app.route('/author/<author_name>')
+def books_by_author(author_name: str):
+    books = get_books_by_author(author_name)
+    return render_template('author_books.html',
+                         books=books,
+                         author=author_name)
 
 
 if __name__ == '__main__':
