@@ -1,0 +1,33 @@
+{
+  "info": {"name": "hotel-api-level3"},
+  "item": [
+    {
+      "name": "Create Room",
+      "request": {
+        "method": "POST",
+        "url": "{{url}}/rooms",
+        "body": {"mode": "raw", "raw": "{\"floor\":1,\"beds\":1,\"guestNum\":2,\"price\":1000}"}
+      }
+    },
+    {
+      "name": "List Available Rooms",
+      "request": {
+        "method": "GET",
+        "url": "{{url}}/rooms?checkIn={{checkIn}}&checkOut={{checkOut}}&guestsCount=2"
+      }
+    },
+    {
+      "name": "Create Booking",
+      "request": {
+        "method": "POST",
+        "url": "{{url}}/bookings",
+        "body": {"raw": "{\"bookingDates\":{\"checkIn\":{{checkIn}},\"checkOut\":{{checkOut}}},\"firstName\":\"John\",\"lastName\":\"Smith\",\"roomId\":{{roomId}}}"}
+      }
+    }
+  ],
+  "variable": [
+    {"key": "url", "value": "http://localhost:5000"},
+    {"key": "checkIn", "value": "20210308"},
+    {"key": "checkOut", "value": "20210311"}
+  ]
+}
