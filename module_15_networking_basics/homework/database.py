@@ -66,3 +66,4 @@ class HotelRepository:
                   booking.check_in, booking.check_out))
             conn.commit()
             return True
+
