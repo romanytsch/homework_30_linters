@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>
-        Books
-    </title>
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <title>Books</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 <h1>Books:</h1>
+<a href="{{ url_for('get_books_form') }}">Добавить книгу</a>
 
 {% if books %}
 <table class="customTable">
@@ -18,26 +17,26 @@
         <th>ID</th>
         <th>Title</th>
         <th>Author</th>
+        <th>Views</th>
     </tr>
     </thead>
     <tbody>
     {% for book in books %}
     <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.views }}</td>
         <td>
-            {{ book.id }}
-        </td>
-        <td>
-            {{ book.title }}
-        </td>
-        <td>
-            {{ book.author }}
+            <a href="{{ url_for('book_detail', book_id=book.id) }}">Подробнее</a>
+            <a href="{{ url_for('books_by_author', author_name=book.author) }}">Книги автора</a>
         </td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
 {% else %}
-<h2> Sorry, no books in DB.</h2>
+<h2>Sorry, no books in DB.</h2>
 {% endif %}
 
 </body>
