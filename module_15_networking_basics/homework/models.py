@@ -16,3 +16,4 @@ class Booking:
     last_name: str
     check_in: str
     check_out: str
+
