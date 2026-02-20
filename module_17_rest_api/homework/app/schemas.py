@@ -1,7 +1,16 @@
 from marshmallow import Schema, fields, validates, ValidationError, post_load
+import sqlite3
+from models import Book, Author, get_book_by_title, get_author_id_by_id, get_author_by_id
 
-from models import get_book_by_title, Book, get_author_id_by_id
+class AuthorSchema(Schema):
+    id = fields.Int(dump_only=True)
+    first_name = fields.Str(required=True)
+    last_name = fields.Str(required=True)
+    middle_name = fields.Str(required=False, allow_none=True)
 
+    @post_load
+    def create_author(self, data: dict) -> Author:
+        return Author(**data)
 
 class BookSchema(Schema):
     id = fields.Int(dump_only=True)

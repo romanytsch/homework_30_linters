@@ -165,3 +165,32 @@ def get_author_id_by_id(author_id: int) -> bool:
         cursor = conn.cursor()
         cursor.execute('SELECT id FROM authors WHERE id = ?', (author_id,))
         return cursor.fetchone() is not None
+
+def add_author(author: Author) -> Author:
+    """Создаёт нового автора"""
+    with sqlite3.connect(DATABASE_NAME) as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO authors (first_name, last_name, middle_name) VALUES (?, ?, ?)',
+            (author.first_name, author.last_name, author.middle_name)
+        )
+        author.id = cursor.lastrowid
+        conn.commit()
+        return author
+
+def get_author_by_id(author_id: int) -> Optional[Author]:
+    """Получает автора по ID"""
+    with sqlite3.connect(DATABASE_NAME) as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM authors WHERE id = ?', (author_id,))
+        row = cursor.fetchone()
+        if row:
+            return Author(id=row[0], first_name=row[1], last_name=row[2], middle_name=row[3])
+        return None
+
+def get_books_by_author(author_id: int) -> List[Book]:
+    """Получает все книги автора"""
+    with sqlite3.connect(DATABASE_NAME) as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM books WHERE author_id = ?', (author_id,))
+        return [_get_book_obj_from_row(row) for row in cursor.fetchall()]
