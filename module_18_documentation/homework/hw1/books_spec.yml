@@ -1,0 +1,151 @@
+openapi: 3.0.3
+info:
+  title: Books API
+  version: 1.0.0
+  description: REST API для работы с книгами и авторами.
+
+servers:
+  - url: http://127.0.0.1:5000
+
+paths:
+  /api/books:
+    get:
+      summary: Получить список всех книг
+      description: Возвращает список всех книг с их `id` и `author_id`.
+      responses:
+        '200':
+          description: Список книг
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    title:
+                      type: string
+                      example: "A Byte of Python"
+                    author_id:
+                      type: integer
+                      example: 1
+    post:
+      summary: Добавить новую книгу
+      description: Создаёт новую книгу по переданным полям `title` и `author_id`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - author_id
+              properties:
+                title:
+                  type: string
+                  example: "New Book"
+                author_id:
+                  type: integer
+                  example: 1
+      responses:
+        '201':
+          description: Книга успешно создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Ошибка валидации (например, не существует автор с таким ID)
+
+  /api/books/{id}:
+    get:
+      summary: Получить книгу по ID
+      description: Возвращает информацию о конкретной книге.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация о книге
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Книга не найдена
+    put:
+      summary: Полностью обновить книгу
+      description: Заменяет все поля книги по указанному ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInput'
+      responses:
+        '200':
+          description: Книга успешно обновлена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Ошибка валидации
+        '404':
+          description: Книга не найдена
+    delete:
+      summary: Удалить книгу
+      description: Удаляет книгу по ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Книга удалена
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Book deleted"
+        '404':
+          description: Книга не найдена
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        author_id:
+          type: integer
+    BookInput:
+      type: object
+      required:
+        - title
+        - author_id
+      properties:
+        title:
+          type: string
+        author_id:
+          type: integer
