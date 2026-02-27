@@ -1,22 +1,81 @@
+import csv
+import io
+import os
 from datetime import datetime, timedelta
 
 from flask import Flask, jsonify, request
 from sqlalchemy import func, and_
+from werkzeug.utils import secure_filename
 
 from ORM_db import Books, ReceivingBooks, Base, engine, Students, Session, Authors
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-@app.route('/books', methods=['GET'])
-def get_all_books():
+
+@app.route('/upload_students', methods=['POST'])
+def upload_students():
+    """Загрузка CSV студентов в базу"""
+    if 'file' not in request.files:
+        return jsonify({'error': 'Файл не найден'}), 400
+
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'Файл не выбран'}), 400
+
+    if not file.filename.endswith('.csv'):
+        return jsonify({'error': 'Требуется CSV файл'}), 400
+
     session = Session()
-    books = session.query(Books).all()
-    result = [{'id': book.id,
-               'name': book.name,
-               'count': book.count,
-               'release_date': book.release_date.isoformat()} for book in books]
-    session.close()
-    return jsonify(result)
+
+    try:
+        # Читаем CSV
+        file.stream.seek(0)
+        text_stream = io.TextIOWrapper(file.stream, encoding='utf-8')
+        reader = csv.DictReader(text_stream, delimiter=';')
+
+        required_fields = {'name', 'surname', 'phone', 'email', 'average_score', 'scholarship'}
+        if not required_fields.issubset(reader.fieldnames):
+            return jsonify({'error': f'Отсутствуют поля: {required_fields - set(reader.fieldnames)}'}), 400
+
+        # Создаем и добавляем студентов
+        students_added = 0
+        for row_num, row in enumerate(reader, 1):
+            try:
+                student = Students(
+                    name=row['name'].strip(),
+                    surname=row['surname'].strip(),
+                    phone=row['phone'].strip(),
+                    email=row['email'].strip(),
+                    average_score=float(row['average_score']),
+                    scholarship=row['scholarship'].lower() in ('true', '1', 'yes', 'да')
+                )
+                session.add(student)
+                students_added += 1
+            except (ValueError, KeyError) as e:
+                print(f"Ошибка в строке {row_num}: {e}")  # Логируем, но продолжаем
+                continue
+
+        if students_added == 0:
+            return jsonify({'error': 'Нет данных для загрузки'}), 400
+
+        session.commit()
+        print(f"Добавлено {students_added} студентов")  # Лог в консоль
+
+        return jsonify({
+            'message': f'Загружено: {students_added} студентов',
+            'count': students_added
+        }), 201
+
+    except Exception as e:
+        session.rollback()
+        print(f"ОШИБКА: {e}")
+        return jsonify({'error': f'Ошибка обработки: {str(e)}'}), 400
+    finally:
+        session.close()
+
 
 @app.route('/debtors', methods=['GET'])
 def get_debtors():
@@ -34,6 +93,32 @@ def get_debtors():
             'book': book.name,
             'days': (datetime.now() - rb.date_of_issue).days
         })
+    session.close()
+    return jsonify(result)
+
+@app.route('/books', methods=['GET'])
+def get_all_books():
+    session = Session()
+    books = session.query(Books).all()
+    result = [{'id': book.id,
+               'name': book.name,
+               'count': book.count,
+               'release_date': book.release_date.isoformat()} for book in books]
+    session.close()
+    return jsonify(result)
+
+@app.route('/students', methods=['GET'])
+def get_all_students():
+    """Получить всех студентов"""
+    session = Session()
+    students = session.query(Students).all()
+    result = [{'id': s.id,
+               'name': f"{s.name} {s.surname}",
+               'phone': s.phone,
+               'email': s.email,
+               'average_score': s.average_score,
+               'scholarship': s.scholarship}
+              for s in students]
     session.close()
     return jsonify(result)
 
@@ -189,6 +274,20 @@ def top_reading_students_year():
               for s in top_students]
     session.close()
     return jsonify(result)
+
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({
+        'message': '📚 Библиотека API v1.0',
+        'status': 'online',
+        'routes': [
+            'GET /books',
+            'GET /students',
+            'GET /debtors',
+            'POST /upload_students',
+            'POST /issue_book'
+        ]
+    })
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)

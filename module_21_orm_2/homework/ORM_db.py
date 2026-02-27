@@ -82,22 +82,22 @@ class ReceivingBooks(Base):
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
     session = Session()
-
-    # Создание связанных данных
-    author = Authors(name="Лев", surname="Толстой")
-    book = Books(name="Война и мир", count=3, release_date=date(1865, 1, 1), author=author)
-    student = Students(name="Иван", surname="Иванов", phone="+375291234567",
-                       email="i@example.com", average_score=4.5, scholarship=True)
-
-    issue = ReceivingBooks(book=book, student=student, date_of_issue=datetime.now())
-
-    session.add_all([author, book, student, issue])
-    session.commit()
-
-    # 🔥 ТЕСТ СВЯЗЕЙ
-    print(f"Книги автора: {len(author.books)}")  # 1
-    print(f"Автор книги: {book.author.surname}")  # Толстой
-    print(f"Книги студента: {len(student.books)}")  # 1 (AssociationProxy!)
-    print(f"Дней с книгой: {issue.count_date_with_book}")  # 0
-
+    #
+    # # Создаем данные ДОЛЖНИКА
+    # author = Authors(name="Лев", surname="Толстой")
+    # book = Books(name="Война и мир", count=3, release_date=date(2026, 1, 1), author=author)
+    # student = Students(name="Иван", surname="Иванов", phone="+375291234567",
+    #                    email="i@example.com", average_score=4.5, scholarship=True)
+    #
+    # # 🔥 ПРОСРОЧЕННАЯ выдача (>14 дней)
+    # old_issue = ReceivingBooks(
+    #     book=book,
+    #     student=student,
+    #     date_of_issue=datetime(2026, 2, 1)  # 26 дней назад
+    # )
+    #
+    # session.add_all([author, book, student, old_issue])
+    # session.commit()
+    #
+    # print("✅ Создан должник!")
     session.close()
