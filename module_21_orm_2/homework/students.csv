@@ -1,0 +1,5 @@
+name;surname;phone;email;average_score;scholarship
+Иван;Иванов;+375291234567;ivan@example.com;4.5;true
+Мария;Петрова;+375292345678;maria@example.com;3.8;false
+Петр;Сидоров;+375293456789;petr@example.com;4.2;true
+Анна;Козлова;+375294567890;anna@example.com;4.8;true
