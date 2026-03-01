@@ -69,3 +69,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print("\nСервер остановлен")
         httpd.server_close()
+

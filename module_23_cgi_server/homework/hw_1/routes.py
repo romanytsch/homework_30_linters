@@ -48,3 +48,4 @@ if __name__ == '__main__':
     with make_server('', 8000, application) as httpd:
         print("WSGI сервер запущен на http://localhost:8000")
         httpd.serve_forever()
+
