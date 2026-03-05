@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  web:
+    image: python:3.12-slim
+    command: >
+      bash -c "pip install flask gunicorn psycopg2-binary &&
+               gunicorn --bind 0.0.0.0:5000 app:app"
+    volumes:
+      - ./app.py:/app.py
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=mydb
+      - DB_USER=user
+      - DB_PASS=pass
+    networks:
+      - backend
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-config.sh:/docker-entrypoint-initdb.d/10-config.sh
+    networks:
+      - backend
+volumes:
+  pgdata:
+networks:
+  backend:
