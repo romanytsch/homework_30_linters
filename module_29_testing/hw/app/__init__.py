@@ -9,10 +9,14 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///parking.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Отложенная инициализация (init_app)
     db.init_app(app)
 
     with app.app_context():
         db.create_all()
 
+    # Регистрация API роутов
+    from .routes import api_bp
+    app.register_blueprint(api_bp)
+
     return app
+
