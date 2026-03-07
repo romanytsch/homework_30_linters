@@ -1,26 +1,24 @@
 import pytest
-import sys
-import os
-
-# ДОБАВИТЬ sys.path В НИЖЕ!
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from app import create_app
 from app.database import db
 
 
 @pytest.fixture(scope="function")
 def app():
+    """Тестовое приложение - БД ИНИЦИАЛИЗИРОВАНА в create_app()"""
     app = create_app()
     app.config.update({
         "TESTING": True,
         "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
-        "SQLALCHEMY_TRACK_MODIFICATIONS": False
+        "SQLALCHEMY_TRACK_MODIFICATIONS": False,
+        "WTF_CSRF_ENABLED": False
     })
 
+    # ✅ БЕЗ db.init_app(app) - уже вызвано в create_app()!
     with app.app_context():
         db.create_all()
         yield app
+        db.session.remove()
         db.drop_all()
 
 
