@@ -140,43 +140,34 @@ def client_enter_parking():
 
 @api_bp.route('/client_parkings', methods=['DELETE'])
 def client_exit_parking():
-    """Выезд с парковки"""
     data = request.get_json()
-
-    if not all(key in data for key in ['client_id', 'parking_id']):
-        return jsonify({'error': 'Требуются client_id, parking_id'}), 400
-
     client_id = data['client_id']
     parking_id = data['parking_id']
 
-    # Найти активную сессию
     entry = ClientParking.query.filter_by(
-        client_id=client_id,
-        parking_id=parking_id,
-        time_out=None
+        client_id=client_id, parking_id=parking_id, time_out=None
     ).first_or_404()
 
     client = Client.query.get(client_id)
-    parking = Parking.query.get(parking_id)
 
-    # Проверка оплаты
     if not client.credit_card:
-        return jsonify({'error': 'Карта не привязана для оплаты'}), 400
+        return jsonify({'error': 'Карта не привязана'}), 400
 
-    # Расчет оплаты (2 руб/мин)
+    # ✅ ИСПРАВЛЕНИЕ: сделать time_in timezone-aware
     now = datetime.now(timezone.utc)
-    duration = now - entry.time_in
+    time_in = entry.time_in.replace(tzinfo=timezone.utc)
+    duration = now - time_in  # Теперь работает!
+
     minutes = duration.total_seconds() / 60
     cost = round(minutes * 2, 2)
 
-    # Выезд
     entry.time_out = now
+    parking = Parking.query.get(parking_id)
     parking.count_available_places += 1
     db.session.commit()
 
     return jsonify({
-        'message': 'Шлагбаум открыт',
+        'message': 'Шлагбаум открыт ✅',
         'duration_minutes': round(minutes, 1),
-        'cost': f'{cost} ₽',
-        'places_left': parking.count_available_places
+        'cost': f'{cost} ₽'
     })

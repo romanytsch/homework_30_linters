@@ -15,7 +15,7 @@ def create_app():
         db.create_all()
 
     # Регистрация API роутов
-    from .routes import api_bp
+    from .api import api_bp
     app.register_blueprint(api_bp)
 
     return app
