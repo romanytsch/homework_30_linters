@@ -1,8 +1,8 @@
 from fastapi.testclient import TestClient
 
-import main
+from main import app
 
-client = TestClient(main.app)
+client = TestClient(app)
 
 
 def test_create_recipe():
@@ -15,4 +15,4 @@ def test_create_recipe():
             "description": "описание",
         },
     )
-    assert response.status_code == 500  # Ожидаем ошибку БД
+    assert response.status_code == 500  # Пока БД не работает
