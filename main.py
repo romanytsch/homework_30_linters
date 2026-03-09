@@ -14,6 +14,7 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+
 # Модель БД
 class RecipeDB(Base):
     __tablename__ = "recipes"
@@ -24,7 +25,9 @@ class RecipeDB(Base):
     ingredients = Column(Text)
     description = Column(Text)
 
+
 Base.metadata.create_all(bind=engine)
+
 
 # Pydantic модели (убрали ConfigDict)
 class RecipeCreate(BaseModel):
@@ -33,11 +36,13 @@ class RecipeCreate(BaseModel):
     ingredients: str
     description: str
 
+
 class RecipeList(BaseModel):
     id: int
     title: str
     views: int
     cooking_time: int
+
 
 class RecipeDetail(BaseModel):
     id: int
@@ -47,6 +52,7 @@ class RecipeDetail(BaseModel):
     description: str
     views: int
 
+
 # Dependency
 def get_db():
     db = SessionLocal()
@@ -55,11 +61,13 @@ def get_db():
     finally:
         db.close()
 
+
 app = FastAPI(
     title="Кулинарная книга API",
     description="API для кулинарной книги с рецептами",
-    version="1.0.0"
+    version="1.0.0",
 )
+
 
 @app.post("/recipes/", response_model=RecipeDetail, status_code=status.HTTP_201_CREATED)
 async def create_recipe(recipe: RecipeCreate, db: Session = Depends(get_db)):
@@ -69,12 +77,16 @@ async def create_recipe(recipe: RecipeCreate, db: Session = Depends(get_db)):
     db.refresh(db_recipe)
     return RecipeDetail.from_orm(db_recipe)
 
+
 @app.get("/recipes/", response_model=List[RecipeList])
 async def get_recipes(db: Session = Depends(get_db)):
-    result = db.query(RecipeDB).order_by(
-        RecipeDB.views.desc(), RecipeDB.cooking_time.asc()
-    ).all()
+    result = (
+        db.query(RecipeDB)
+        .order_by(RecipeDB.views.desc(), RecipeDB.cooking_time.asc())
+        .all()
+    )
     return [RecipeList.from_orm(r) for r in result]
+
 
 @app.get("/recipes/{recipe_id}", response_model=RecipeDetail)
 async def get_recipe_detail(recipe_id: int, db: Session = Depends(get_db)):
