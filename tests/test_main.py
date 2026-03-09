@@ -17,10 +17,12 @@ def test_create_recipe():
     )
     assert response.status_code == 201
 
+
 def test_get_recipes():
     response = client.get("/recipes/")
     assert response.status_code == 200
     assert isinstance(response.json(), list)
+
 
 def test_get_recipe_not_found():
     response = client.get("/recipes/999")
