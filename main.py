@@ -1,9 +1,9 @@
-from typing import List, Optional
+from typing import List
 from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
 
 # База данных
 SQLALCHEMY_DATABASE_URL = "sqlite:///./recipes.db"
@@ -16,7 +16,6 @@ Base = declarative_base()
 # Модель БД
 class RecipeDB(Base):
     __tablename__ = "recipes"
-
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
     cooking_time = Column(Integer)
@@ -26,22 +25,18 @@ class RecipeDB(Base):
 
 Base.metadata.create_all(bind=engine)
 
-# Pydantic модели
+# Pydantic модели (убрали ConfigDict)
 class RecipeCreate(BaseModel):
     title: str
     cooking_time: int
     ingredients: str
     description: str
 
-    model_config = ConfigDict(from_attributes=True)
-
 class RecipeList(BaseModel):
     id: int
     title: str
     views: int
     cooking_time: int
-
-    model_config = ConfigDict(from_attributes=True)
 
 class RecipeDetail(BaseModel):
     id: int
@@ -50,8 +45,6 @@ class RecipeDetail(BaseModel):
     ingredients: str
     description: str
     views: int
-
-    model_config = ConfigDict(from_attributes=True)
 
 # Dependency
 def get_db():
@@ -69,7 +62,7 @@ app = FastAPI(
 
 @app.post("/recipes/", response_model=RecipeDetail, status_code=status.HTTP_201_CREATED)
 async def create_recipe(recipe: RecipeCreate, db: Session = Depends(get_db)):
-    db_recipe = RecipeDB(**recipe.model_dump())
+    db_recipe = RecipeDB(**recipe.dict())
     db.add(db_recipe)
     db.commit()
     db.refresh(db_recipe)
@@ -78,8 +71,7 @@ async def create_recipe(recipe: RecipeCreate, db: Session = Depends(get_db)):
 @app.get("/recipes/", response_model=List[RecipeList])
 async def get_recipes(db: Session = Depends(get_db)):
     result = db.query(RecipeDB).order_by(
-        RecipeDB.views.desc(), 
-        RecipeDB.cooking_time.asc()
+        RecipeDB.views.desc(), RecipeDB.cooking_time.asc()
     ).all()
     return [RecipeList.from_orm(r) for r in result]
 
