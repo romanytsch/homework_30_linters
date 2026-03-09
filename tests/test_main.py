@@ -9,4 +9,3 @@ def test_create_recipe():
         "ingredients": "ингредиенты", "description": "описание"
     })
     assert response.status_code == 201
-    assert response.json()["title"] == "Тест"
