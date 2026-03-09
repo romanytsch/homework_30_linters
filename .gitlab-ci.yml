@@ -11,13 +11,14 @@ cache:
       - requirements.txt
   paths:
     - .cache/pip/
-    - **/__pycache__/
+    - "**/__pycache__/"
 
 lint:
   stage: lint
   image: python:3.12-slim
-  script:
+  before_script:
     - pip install ruff
+  script:
     - ruff check .
     - ruff format --check .
   cache:
@@ -27,11 +28,10 @@ lint:
 test:
   stage: test
   image: python:3.12-slim
-  services:
-    - name: postgres:16
-      alias: db
-  script:
+  # УБИРАЕМ PostgreSQL - используем SQLite как в main.py
+  before_script:
     - pip install -r requirements.txt
+  script:
     - pytest -v
   cache:
     paths:
