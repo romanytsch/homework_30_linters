@@ -15,4 +15,4 @@ def test_create_recipe():
             "description": "описание",
         },
     )
-    assert response.status_code == 500  # Пока БД не работает
+    assert response.status_code == 201
