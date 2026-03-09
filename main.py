@@ -1,7 +1,7 @@
 from typing import List
-from pydantic import BaseModel, ConfigDict
 
 from fastapi import Depends, FastAPI, HTTPException, status
+from pydantic import BaseModel, ConfigDict
 from sqlalchemy import Column, Integer, String, Text, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker
