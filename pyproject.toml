@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 88
+indent-width = 4
+
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "Q", "I", "N", "S", "T20", "DJ", "UP", "YTT", "ANN", "S", "FBT", "C4", "ARG", "PTH"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-third-party = ["fastapi", "pydantic", "sqlalchemy", "typing"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
