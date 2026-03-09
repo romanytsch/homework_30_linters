@@ -1,9 +1,10 @@
-from fastapi import FastAPI, Depends, HTTPException, status
-from pydantic import BaseModel
-from sqlalchemy import create_engine, Column, Integer, String, Text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session
 from typing import List
+
+from fastapi import Depends, FastAPI, HTTPException, status
+from pydantic import BaseModel
+from sqlalchemy import Column, Integer, String, Text, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import Session, sessionmaker
 
 # База данных
 SQLALCHEMY_DATABASE_URL = "sqlite:///./recipes.db"
