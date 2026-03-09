@@ -15,7 +15,6 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 
-
 # Модель БД
 class RecipeDB(Base):
     __tablename__ = "recipes"
